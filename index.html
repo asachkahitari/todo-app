@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do App</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+</head>
+<body onload="showData()">
+    <div class="container">
+        <div class="row">
+            <div class="complete-div">
+                <h3>TODO APP</h3>
+                <div class="search-div">
+                    <input type="text" id="searchInput" placeholder="Search tasks">
+                    <button onclick="exactTodoSearch()">Exact Todo Search</button>
+                    <button onclick="subtaskSearch()">Search by Subtasks</button>
+                    <button onclick="similarWordsSearch()">Search by Similar Words</button>
+                    <button onclick="partialSearch()">Partial Search</button>
+                    <button onclick="tagSearch()">Search by Tags</button>
+                </div>
+                <div class="filter-div">
+                    <div class="filter-inner-div">
+                        <button onclick="filterByCategory()">Filter according to category</button>
+                        <button onclick="filterByPriority()">Filter according to priority</button>
+                    </div>
+                    <div class="filter-second-div">
+                        <input type="date" id="startDate" placeholder="Start Date">
+                        <input type="date" id="endDate" placeholder="End Date">
+                        <button onclick="filterByDueDate()">Filter By due Date</button>
+                    </div>
+                </div>
+                <div class="sorting-div">
+                    <button onclick="sortTasksByDueDate()">Sort by Due Date</button>
+                    <button onclick="sortTasksByPriority()">Sort by Priority</button>
+                </div>
+                <div class="analysis-div">
+                    <button onclick="viewBacklogs()">View Backlogs</button>
+                    <button onclick="activityLog()">Check activity log</button>
+                </div>
+                <div class="output-div">
+                    <div class="left-div">
+                        <h4>Ongoing</h4>
+                        <div id="todo-list">
+                            <p>Empty List</p>
+                        </div>
+                    </div>
+                    <div class="right-div">
+                        <h4>Completed</h4>
+                        <div id="done-list">
+                        </div>
+                    </div>
+                </div>
+                <div class="input-div-container">
+                    <input type="text" id="title" placeholder="What do you want to do?">
+                    <div class="add-task-div">
+                        <input type="text" id="category" placeholder="Add Category">
+                        <input type="date" id="dueDate" placeholder="Due Date">
+                        <select name="priority" id="priority">
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+                    </div>
+                    <div class="add-tag-subtask">
+                        <div id="tag-container">
+                            <input type="text" class="tag-input" placeholder="Add Tag">
+                        </div>
+                        <button onclick="addTagInput()">Add Tag</button>
+                        <div id="subtask-container">
+                            <input type="text" class="subtask-input" placeholder="Add Subtask">
+                        </div>
+                        <button onclick="addSubtaskInput()">Add Subtask</button>
+                    </div>
+                    <button class="add-task-btn" onclick="addTodo()">Add Task</button>
+                    <!-- <button onclick="fetchTodo()">Fetch Tasks</button> -->
+                    <!-- <div class="task-delete-div">
+                        <input type="text" id="deleteTask" placeholder="Which task you want to delete?">
+                        <button class="deletebtn" onclick="findTaskToDelete()">Delete Task</button>
+                    </div> -->
+                    <div id="edit-modal">
+                        <input type="text" name="editedTask" id="editedTask" placeholder="Enter the new task">
+                        <button id="close-modal">Done</button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
