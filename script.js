@@ -185,6 +185,9 @@ function showDoneTasks(){
         newtask.addEventListener('click', undoTask);
         newdiv.appendChild(newtask);
     }
+    if(doneTasks.length == 0){
+        doneTaskList.innerHTML = `<p>No tasks here!</p>`
+    }
 }
 
 // Function to add new subtask input field dynamically
@@ -270,15 +273,24 @@ const editTodo = e => {
 } 
 document.querySelector('#close-modal').addEventListener('click', function(e) {
     let editedTask = document.getElementById("editedTask");
+    let editedDueDate = document.getElementById("editedDueDate");
+    let editedCategory = document.getElementById("editedCategory");
+    let editedPriority = document.getElementById("editedPriority");
     // console.log(editedTask.value);
     for(let i = 0; i < tasks.length; i++){
         // console.log(e.target.id);
         if(i == editId){
             // console.log(editedTask.value);
-            tasks[i].title = editedTask.value;
+            if(editedTask.value != "") tasks[i].title = editedTask.value;
+            if(editedDueDate.value != "") tasks[i].dueDate = editedDueDate.value;
+            if(editedPriority.value != "") tasks[i].priority = editedPriority.value;
+            if(editedCategory.value != "") tasks[i].category = editedCategory.value;
         }
     }
     editedTask.value = "";
+    editedDueDate.value = "";
+    editedPriority.value = "Low";
+    editedCategory.value = "";
     document.getElementById('edit-modal').style.display = 'none';
     saveData();
     showTasks();
@@ -373,15 +385,6 @@ function sortTasksByPriority() {
     showTasks();
 }
 
-// edit Due Date
-const editDueDate = e => {
-
-}
-
-// edit priority
-const editPriority = e => {
-
-}
 
 // activity log
 

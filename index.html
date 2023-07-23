@@ -39,7 +39,7 @@
                 </div>
                 <div class="analysis-div">
                     <button onclick="viewBacklogs()">View Backlogs</button>
-                    <button onclick="activityLog()">Check activity log</button>
+                    <button onclick="activityLog()" class="activeLog">Check activity log</button>
                 </div>
                 <div class="output-div">
                     <div class="left-div">
@@ -51,38 +51,52 @@
                     <div class="right-div">
                         <h4>Completed</h4>
                         <div id="done-list">
+                            <p>No tasks here!</p>
+                        </div>
+                        <hr>
+                        <div class="input-div-container">
+                            <h4>Add new task</h4>
+                            <input class="task-title" type="text" id="title" placeholder="What do you want to do?">
+                            <div class="add-task-div">
+                                <input type="text" id="category" placeholder="Add Category">
+                                <input type="date" id="dueDate" placeholder="Due Date">
+                                <select name="priority" id="priority">
+                                    <option value="Low">Low</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="High">High</option>
+                                </select>
+                            </div>
+                            <div class="add-tag-subtask">
+                                <div id="tag-container">
+                                    <input type="text" class="tag-input" placeholder="Add Tag">
+                                </div>
+                                <button onclick="addTagInput()">Add Tag</button>
+                                <div id="subtask-container">
+                                    <input type="text" class="subtask-input" placeholder="Add Subtask">
+                                </div>
+                                <button onclick="addSubtaskInput()">Add Subtask</button>
+                            </div>
+                            <button class="add-task-btn" onclick="addTodo()">Add Task</button>
+                            <!-- <button onclick="fetchTodo()">Fetch Tasks</button> -->
+                            <!-- <div class="task-delete-div">
+                                <input type="text" id="deleteTask" placeholder="Which task you want to delete?">
+                                <button class="deletebtn" onclick="findTaskToDelete()">Delete Task</button>
+                            </div> -->
                         </div>
                     </div>
                 </div>
-                <div class="input-div-container">
-                    <input type="text" id="title" placeholder="What do you want to do?">
-                    <div class="add-task-div">
-                        <input type="text" id="category" placeholder="Add Category">
-                        <input type="date" id="dueDate" placeholder="Due Date">
-                        <select name="priority" id="priority">
-                            <option value="Low">Low</option>
-                            <option value="Medium">Medium</option>
-                            <option value="High">High</option>
-                        </select>
-                    </div>
-                    <div class="add-tag-subtask">
-                        <div id="tag-container">
-                            <input type="text" class="tag-input" placeholder="Add Tag">
+                <div id="edit-modal" class="modal">
+                    <div class="modal-content">
+                        <input class="task-title" type="text" id="editedTask" placeholder="What do you want to do?">
+                        <div class="add-task-div">
+                            <input type="text" id="editedCategory" placeholder="Add Category">
+                            <input type="date" id="editedDueDate" placeholder="Due Date">
+                            <select name="priority" id="editedPriority">
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                            </select>
                         </div>
-                        <button onclick="addTagInput()">Add Tag</button>
-                        <div id="subtask-container">
-                            <input type="text" class="subtask-input" placeholder="Add Subtask">
-                        </div>
-                        <button onclick="addSubtaskInput()">Add Subtask</button>
-                    </div>
-                    <button class="add-task-btn" onclick="addTodo()">Add Task</button>
-                    <!-- <button onclick="fetchTodo()">Fetch Tasks</button> -->
-                    <!-- <div class="task-delete-div">
-                        <input type="text" id="deleteTask" placeholder="Which task you want to delete?">
-                        <button class="deletebtn" onclick="findTaskToDelete()">Delete Task</button>
-                    </div> -->
-                    <div id="edit-modal">
-                        <input type="text" name="editedTask" id="editedTask" placeholder="Enter the new task">
                         <button id="close-modal">Done</button>
                     </div>
                 </div>
