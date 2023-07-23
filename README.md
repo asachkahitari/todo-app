@@ -4,12 +4,7 @@ The schema link for the ToDo App: https://docs.google.com/spreadsheets/d/18uiEy9
 
 
 Some key points:
-    a. There are some features which are completely functioning in backend. But unfortuantely due to time constraints I wasnt able to display it om frontend. You can check the functionality on console. Listing those features down:
-        1. Filter by category
-        2. Filter by priority
-        3. Filter by due date
-        3. View activity log
-
+    a. 
 Assignment 3: Todo List (Deadline Sunday 23rd July 2023: 11am)
 Create a todo-list application with the following features:
 Add Todo: Users can add new tasks to the todo list.

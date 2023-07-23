@@ -115,7 +115,7 @@ function showTasks(){
         let dueDate = document.createElement("p");
         dueDate.setAttribute("class", "todo-due-date");
         dueDate.innerHTML = tasks[i].dueDate;
-        dueDate.addEventListener('click', editDueDate);
+        // dueDate.addEventListener('click', editDueDate);
         row1.appendChild(dueDate);
 
         let editIcon = document.createElement("button");
@@ -346,6 +346,25 @@ function filterByCategory(){
     //     //     // console.log(categoryDiv);
     //     // }
     // }
+    for (const category in categorySortTasks) {
+        if (categorySortTasks.hasOwnProperty(category)) {
+            const categoryDiv = document.createElement("div");
+            categoryDiv.innerHTML = `<h4>${category}</h4>`;
+            outputDiv.appendChild(categoryDiv);
+
+            if (categorySortTasks[category].length === 0) {
+                const noTasksMessage = document.createElement("p");
+                noTasksMessage.textContent = "No tasks in this category.";
+                categoryDiv.appendChild(noTasksMessage);
+            } else {
+                categorySortTasks[category].forEach(task => {
+                    const taskDiv = createTaskDiv(task);
+                    categoryDiv.appendChild(taskDiv);
+                });
+            }
+        }
+    }
+
 }
 
 // priority sort
@@ -357,6 +376,26 @@ function filterByPriority(){
         else prioritySortTasks[todo.priority].push(todo);
     }
     console.log(prioritySortTasks);
+    const outputDiv = document.querySelector(".output-div");
+    outputDiv.innerHTML = "";
+    for (const priority in prioritySortTasks) {
+        if (prioritySortTasks.hasOwnProperty(priority)) {
+            const priorityDiv = document.createElement("div");
+            priorityDiv.innerHTML = `<h4>${priority}</h4>`;
+            outputDiv.appendChild(priorityDiv);
+
+            if (prioritySortTasks[priority].length === 0) {
+                const noTasksMessage = document.createElement("p");
+                noTasksMessage.textContent = "No tasks in this priority.";
+                priorityDiv.appendChild(noTasksMessage);
+            } else {
+                prioritySortTasks[priority].forEach(task => {
+                    const taskDiv = createTaskDiv(task);
+                    priorityDiv.appendChild(taskDiv);
+                });
+            }
+        }
+    }
 }
 
 // due date sort
@@ -368,6 +407,18 @@ function filterByDueDate(){
         return (taskDate >= startFilterDate && taskDate <= endFilterDate);
     });
     console.log(filteredTasks);
+    const outputDiv = document.querySelector(".output-div");
+    outputDiv.innerHTML = "";
+    if (filteredTasks.length === 0) {
+        const noTasksMessage = document.createElement("p");
+        noTasksMessage.textContent = "No tasks in this due date range.";
+        outputDiv.appendChild(noTasksMessage);
+    } else {
+        filteredTasks.forEach(task => {
+            const taskDiv = createTaskDiv(task);
+            outputDiv.appendChild(taskDiv);
+        });
+    }
 }
 
 // sort tasks by due date
@@ -399,8 +450,25 @@ function keepLog(task, taskType){
     logsArray.push(log);
 }
 function activityLog(){
-    console.log(logsArray);
+    console.log(logsArray)
+    const outputDiv = document.querySelector(".output-div");
+    outputDiv.innerHTML = "";
+    if (logsArray.length === 0) {
+        const noTasksMessage = document.createElement("p");
+        noTasksMessage.textContent = "No activites done.";
+        outputDiv.appendChild(noTasksMessage);
+    } else {
+        logsArray.forEach(task => {
+            const taskDiv = createActivityDiv(task);
+            outputDiv.appendChild(taskDiv);
+        });
+    }
 } 
+function createActivityDiv(task) {
+    const taskDiv = document.createElement("div");
+    taskDiv.innerHTML = `<span><p><strong>${task.logType}</strong></p> <p><strong>${task.logEvent.title}</strong></p> <p><strong>${task.time}</strong></p></span>`;
+    return taskDiv;
+}
 
 // backlog and missed tasks
 
