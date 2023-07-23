@@ -199,7 +199,7 @@ button:hover {
 .tag-list li{
   margin-right: 5px;
   padding: 5px 10px;
-  background-color: #f80505;
+  background-color: grey;
   margin-top: 0px;
   list-style-type: none;
   color: #fff;
