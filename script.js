@@ -91,6 +91,14 @@ function showTasks(){
         let newdiv = document.createElement("div");
         newdiv.classList.add('todo-div')
         newdiv.classList.add("priority-" + tasks[i].priority);
+        newdiv.draggable = true;
+        newdiv.addEventListener("dragstart", () => {
+            newdiv.classList.add("is-dragging");
+            // console.log(newdiv);
+        });
+        newdiv.addEventListener("dragend", () => {
+            newdiv.classList.remove("is-dragging");
+        });
         taskList.appendChild(newdiv);
 
         let row1 = document.createElement("div");
@@ -168,6 +176,7 @@ function showDoneTasks(){
     for(let i = 0; i < doneTasks.length; i++){
         let newdiv = document.createElement("div");
         newdiv.classList.add('todo-div')
+        newdiv.draggable = true;
         doneTaskList.appendChild(newdiv);
 
         let newtaskcheckbox = document.createElement('input');
@@ -608,3 +617,51 @@ function showData(){
     // console.log(tasks);
     showTasks();
 }
+
+const draggables = document.querySelectorAll(".todo-div");
+const droppables = document.querySelectorAll(".sections");
+
+draggables.forEach((task) => {
+  task.addEventListener("dragstart", () => {
+    task.classList.add("is-dragging");
+    console.log(task);
+  });
+  task.addEventListener("dragend", () => {
+    task.classList.remove("is-dragging");
+  });
+});
+
+droppables.forEach((zone) => {
+  zone.addEventListener("dragover", (e) => {
+    e.preventDefault();
+
+    const bottomTask = insertAboveTask(zone, e.clientY);
+    const curTask = document.querySelector(".is-dragging");
+    // console.log(curTask);
+    if (!bottomTask) {
+      zone.appendChild(curTask);
+    } else {
+      zone.insertBefore(curTask, bottomTask);
+    }
+  });
+});
+
+const insertAboveTask = (zone, mouseY) => {
+  const els = zone.querySelectorAll(".task:not(.is-dragging)");
+
+  let closestTask = null;
+  let closestOffset = Number.NEGATIVE_INFINITY;
+
+  els.forEach((task) => {
+    const { top } = task.getBoundingClientRect();
+
+    const offset = mouseY - top;
+
+    if (offset < 0 && offset > closestOffset) {
+      closestOffset = offset;
+      closestTask = task;
+    }
+  });
+
+  return closestTask;
+};
